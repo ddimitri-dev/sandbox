@@ -17,26 +17,27 @@ export class CatalogEffect {
     return this.action$.pipe(
       ofType(
         loadCatalog,
-        nextCatalogPage,
+     //   nextCatalogPage,
       ),
-      withLatestFrom(this.store.select(selectorPageIndex)),
-      switchMap(([_, pageIndex]) => {
-        return this.catalogService.loadArticles(pageIndex).pipe(
+    //  withLatestFrom(this.store.select(selectorPageIndex)),
+      switchMap(() => {
+        return this.catalogService.loadArticles().pipe(
           map((productItems) => {
             return loadCatalogSuccess({items: productItems})
           }),
-          catchError((error: string) => {
-            return of(loadCatalogFailure({err: error}))
-          }),
         )
-      })
+      }),
+    catchError((error: string) => {
+      return of(loadCatalogFailure({err: error}))
+    }),
     )
   });
 
   constructor(
     private action$: Actions,
     private catalogService: CatalogService,
-    private store: Store<CatalogState>) {
+   // private store: Store<CatalogState>
+  ) {
 
   }
 
