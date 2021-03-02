@@ -5,8 +5,8 @@ export const cartFeatureKey = "cart";
 
 let featureSelector = createFeatureSelector(cartFeatureKey);
 
-export let selectorCartCounter = createSelector(featureSelector, (state: CartState) => {return state.counter});
+export let selectorCartCounter = createSelector(featureSelector, (state: CartState) => {return state.productList.length});
 
 export let selectorProductList = createSelector(featureSelector, (state: CartState) => {return state.productList});
 
-export let selectorTotal =  createSelector(featureSelector, (state: CartState) => {return state.total});
+export let selectorTotal =  createSelector(featureSelector, (state: CartState) => {return state.productList.reduce((total, item) => total + item.price, 0)});

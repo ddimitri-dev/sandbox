@@ -8,17 +8,17 @@ import {ProductItem} from "../../catalog/product-item";
 const cartStateReducer = createReducer(
   initialCartState,
   on(addToCart, (state: CartState, action): CartState => ({
-    counter: state.counter + 1,
+   // counter: state.counter + 1,
     productList:  [...state.productList, action.item] ,
-    total: state.total + action.item.price
+ // total: state.total + action.item.price
       // state.productList.concat(action.item)
   })), // Need to use ( to avoid object type cause the {} > ({})
   on(removeFromCart, (state: CartState, action): CartState => ({
-    counter: state.counter - 1,
+   // counter: state.counter - 1,
     productList: state.productList.filter( (product: ProductItem) => {
       return product !== action.item
     }), // state.productList.splice(state.productList.indexOf(action.item), 1)
-    total: state.total - action.item.price
+   // total: state.total - action.item.price
   }))
 );
 
