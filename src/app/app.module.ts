@@ -10,6 +10,7 @@ import {CartModule} from './cart/cart.module';
 import {CountryModule} from './country/country.module';
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {StoreModule} from "@ngrx/store";
     CartModule,
     CountryModule,
     StoreModule.forRoot({}), // Will combine all features
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent],

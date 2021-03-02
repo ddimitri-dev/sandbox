@@ -1,7 +1,7 @@
 <h1>Catalog</h1>
 
 <div style="display: flex; flex-wrap: wrap; align-content: space-between">
-  <mat-card *ngFor="let item of catalog" style="flex: 1 0 21%; margin: 5px;">
+  <mat-card *ngFor="let item of catalog$ | async" style="flex: 1 0 21%; margin: 5px;">
     <mat-card-header>
       <mat-card-title>{{item.name}}</mat-card-title>
     </mat-card-header>
@@ -20,4 +20,6 @@
   </mat-card>
 
   <button (click)="nextPage()" mat-button>Next page</button>
+
+  <button (click)="reloadArticles()" mat-button>Reload</button>
 </div>
