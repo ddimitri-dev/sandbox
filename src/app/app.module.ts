@@ -10,8 +10,6 @@ import {CartModule} from './cart/cart.module';
 import {CountryModule} from './country/country.module';
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {StoreModule} from "@ngrx/store";
-import {reducer} from "./cart/cart-store/cart.reducer";
-import {cartFeatureKey} from "./cart/cart-store/cart.selectors";
 
 @NgModule({
   declarations: [
@@ -25,7 +23,7 @@ import {cartFeatureKey} from "./cart/cart-store/cart.selectors";
     CartIconModule,
     CartModule,
     CountryModule,
-    StoreModule.forRoot({[cartFeatureKey]: reducer}), // Dynamic usage of the value of the const
+    StoreModule.forRoot({}), // Will combine all features
     StoreDevtoolsModule.instrument()
   ],
   providers: [],

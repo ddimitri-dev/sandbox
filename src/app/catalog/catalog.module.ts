@@ -5,6 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {CatalogService} from './service/catalog.service';
+import {CatalogStoreModule} from "./catalog-store/catalog-store.module";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {CatalogService} from './service/catalog.service';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    CatalogStoreModule
   ],
   exports: [
     CatalogComponent,
