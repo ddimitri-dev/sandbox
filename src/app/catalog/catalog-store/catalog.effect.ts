@@ -1,9 +1,12 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {loadCatalog, loadCatalogFailure, loadCatalogSuccess} from "./catalog.actions";
+import {loadCatalog, loadCatalogFailure, loadCatalogSuccess, nextCatalogPage} from "./catalog.actions";
 import {CatalogService} from "../service/catalog.service";
-import {catchError, map, switchMap, tap} from "rxjs/operators";
+import {catchError, map, switchMap, tap, withLatestFrom} from "rxjs/operators";
 import {of} from "rxjs";
+import {CatalogState} from "./catalog.store";
+import {Store} from "@ngrx/store";
+import {selectorPageIndex} from "./catalog.selector";
 
 @Injectable()
 export class CatalogEffect {
@@ -12,27 +15,19 @@ export class CatalogEffect {
 
   loadCatalog$ = createEffect(() => {
     return this.action$.pipe(
-      tap(action => {
-        console.log(action);
-      }),
-      ofType(loadCatalog),
-      tap(action => {
-        console.log(action);
-      }),
-      switchMap(() => {
-        return this.catalogService.loadArticles().pipe(
-          tap(result => {
-            console.log(result);
-          }),
+      ofType(
+        loadCatalog,
+        nextCatalogPage,
+      ),
+      withLatestFrom(this.store.select(selectorPageIndex)),
+      switchMap(([_, pageIndex]) => {
+        return this.catalogService.loadArticles(pageIndex).pipe(
           map((productItems) => {
             return loadCatalogSuccess({items: productItems})
           }),
           catchError((error: string) => {
             return of(loadCatalogFailure({err: error}))
           }),
-        tap(action => {
-          console.log(action);
-        }),
         )
       })
     )
@@ -40,7 +35,9 @@ export class CatalogEffect {
 
   constructor(
     private action$: Actions,
-    private catalogService: CatalogService) {
+    private catalogService: CatalogService,
+    private store: Store<CatalogState>) {
+
   }
 
 }

@@ -7,3 +7,5 @@ let featureSelector = createFeatureSelector(catalogFeatureKey);
 
 export let selectorProductList = createSelector(featureSelector, (state: CatalogState) => {return state.productList});
 
+
+export let selectorPageIndex = createSelector(featureSelector, (state: CatalogState) => {return state.page});

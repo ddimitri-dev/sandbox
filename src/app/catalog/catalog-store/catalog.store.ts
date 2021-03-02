@@ -2,11 +2,12 @@ import {ProductItem} from "../product-item";
 
 export interface CatalogState {
   productList: ProductItem[];
-  errorMessage?:string;
-
+  errorMessage:string;
+  page: number;
 }
 
 export const initialCatalogState: CatalogState = {
   productList : [],
-  errorMessage : ''
-}
+  errorMessage : '',
+  page: 0
+};

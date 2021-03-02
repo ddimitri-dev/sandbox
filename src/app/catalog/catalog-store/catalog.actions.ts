@@ -14,3 +14,8 @@ export const loadCatalogFailure = createAction(
   "[CATALOG] Load catalog failure",
   props<{err: string}>()
 );
+
+
+export const nextCatalogPage = createAction(
+  "[CATALOG] Next catalog page"
+);

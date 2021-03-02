@@ -4,7 +4,7 @@ import {CatalogService} from '../service/catalog.service';
 import {CartState} from "../../cart/cart-store/cart.store";
 import {Store} from "@ngrx/store";
 import {addToCart} from "../../cart/cart-store/cart.actions";
-import {loadCatalog, loadCatalogFailure, loadCatalogSuccess} from "../catalog-store/catalog.actions";
+import {loadCatalog, loadCatalogFailure, loadCatalogSuccess, nextCatalogPage} from "../catalog-store/catalog.actions";
 import {selectorProductList} from "../catalog-store/catalog.selector";
 
 @Component({
@@ -25,6 +25,7 @@ export class CatalogComponent implements OnInit {
   }
 
   nextPage() {
+    this.store.dispatch(nextCatalogPage());
   }
 
   addToCart(item: ProductItem) {
